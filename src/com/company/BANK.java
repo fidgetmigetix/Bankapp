@@ -1,23 +1,60 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BANK {
 
     private String nameofBank;
     private ArrayList<Accountnormal> kontanormal;
     private ArrayList<AccountExtra> kontaekstra;
+    private ArrayList<Transactions> transactions;
 
-    public BANK() {
+    public BANK( ArrayList<Accountnormal> kontanormal, ArrayList<AccountExtra> kontaekstra,
+                ArrayList<Transactions> transactions) {
         this.nameofBank = "SUPERBANK";
-        this.kontanormal = new ArrayList<Accountnormal>();
-        this.kontaekstra = new ArrayList<AccountExtra>();
+        this.kontanormal = kontanormal;
+        this.kontaekstra = kontaekstra;
+        this.transactions = transactions;
+    }
+
+
+    public String getNameofBank() {
+        return nameofBank;
+    }
+
+    public void setNameofBank(String nameofBank) {
+        this.nameofBank = nameofBank;
+    }
+
+    public ArrayList<Accountnormal> getKontanormal() {
+        return kontanormal;
+    }
+
+    public void setKontanormal(ArrayList<Accountnormal> kontanormal) {
+        this.kontanormal = kontanormal;
+    }
+
+    public ArrayList<AccountExtra> getKontaekstra() {
+        return kontaekstra;
+    }
+
+    public void setKontaekstra(ArrayList<AccountExtra> kontaekstra) {
+        this.kontaekstra = kontaekstra;
+    }
+
+    public ArrayList<Transactions> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(ArrayList<Transactions> transactions) {
+        this.transactions = transactions;
     }
 
     private Accountnormal findAccount(String name){
         for( int i=0; i<this.kontanormal.size(); i++){
             Accountnormal checkedAccount= this.kontanormal.get(i);
-            if(checkedAccount.getNameofUser().equals(name)){
+            if(checkedAccount.getName().equals(name)){
                 return checkedAccount;
             }
         }
@@ -25,10 +62,10 @@ public class BANK {
 
     }
 
-    private Accountnormal findAccount(String name,String password){
+    public  Accountnormal findAccount(String name,String password){
         for( int i=0; i<this.kontanormal.size(); i++){
             Accountnormal checkedAccount= this.kontanormal.get(i);
-            if((checkedAccount.getNameofUser().equals(name))&&(checkedAccount.getPassword().equals(password))){
+            if((checkedAccount.getName().equals(name))&&(checkedAccount.getPassword().equals(password))){
                 return checkedAccount;
             }
         }
@@ -39,7 +76,7 @@ public class BANK {
     private AccountExtra findAccountPLUS(String name){
         for( int i=0; i<this.kontaekstra.size(); i++){
             AccountExtra checkedAccount= this.kontaekstra.get(i);
-            if(checkedAccount.getNameofUser().equals(name)){
+            if(checkedAccount.getName().equals(name)){
                 return checkedAccount;
             }
         }
@@ -47,10 +84,12 @@ public class BANK {
     }
 
 
-    private AccountExtra findAccountPlus(String name,String password){
-        for( int i=0; i<this.kontanormal.size(); i++){
+
+
+    public AccountExtra findAccountPlus(String name,String password){
+        for( int i=0; i<this.kontaekstra.size(); i++){
             AccountExtra checkedAccount= this.kontaekstra.get(i);
-            if((checkedAccount.getNameofUser().equals(name))&&(checkedAccount.getPassword().equals(password))){
+            if((checkedAccount.getName().equals(name))&&(checkedAccount.getPassword().equals(password))){
                 return checkedAccount;
             }
         }
@@ -86,9 +125,34 @@ public class BANK {
     }
 
 
-    public String znalezionekontonromal(String name, String password){
-        Accountnormal kontonor= findAccount(name,password);
-        return kontonor.toString();
+//    public void znalezionekontonromal(String name, String password){
+//        if(findAccount(name, password)!=null){
+//            findAccount(name, password).toString();
+//        }else{
+//            System.out.println("nie znaleziono");
+//        }
+//
+//    }
+
+    public void displaycustomers(){
+        System.out.println("Konta normalne: ");
+//        for(int i=0; i<kontanormal.size(); i++){
+//            System.out.println(i +" "+ kontanormal.get(i).getName() + "password: " + kontanormal.get(i).getPassword());
+//        }
+        System.out.println(Arrays.toString(kontanormal.toArray()));
+
+        System.out.println("Konta PLUS: ");
+//        for(int i=0; i<kontaekstra.size(); i++){
+//            System.out.println(i +" "+ kontaekstra.get(i).getName() + "password: " + kontaekstra.get(i).getPassword());
+//        }
+        System.out.println(Arrays.toString(kontaekstra.toArray()));
+
+    }
+
+    public void displaytransactions(){
+        for(int i=0; i < transactions.size(); i++){
+            System.out.println(i + transactions.get(i).toString());
+        }
     }
 
 
